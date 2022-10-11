@@ -1,0 +1,182 @@
+#include <iostream>
+#define max 10
+//IlhamKusumaAryanda
+//A11.2021.13899
+
+using namespace std;
+
+struct queue {
+    int data[max];
+    int awal, akhir, jml;
+} antre;
+
+void pertama() {
+    antre.awal = -1;
+    antre.akhir = -1;
+}
+
+bool isfull(){
+    if (antre.akhir == max -1){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isempty(){
+    if (antre.akhir == -1){
+        return true;
+    }
+
+    else {
+        return false;
+    }
+}
+
+
+void inqueue(){
+    int elemen, jml, ratata;
+    if (!isfull()){
+        cout << "Input Data : ";
+        cin >> elemen;
+        cout << "Data berhasil Di tambahkan" <<endl <<endl;
+        antre.data[antre.akhir] = elemen;
+        antre.akhir++;
+    }
+    else {
+        cout << "Antrian Penuh" << endl << endl;
+    }
+}
+
+void dequeue(){
+    if (!isempty()){
+        cout << "Mengambil data " << antre.awal << endl;
+        for (int i=antre.awal; i<antre.akhir; i++){
+            antre.data[i]=antre.data[i+1];
+        }
+        antre.akhir--;
+        cout << "Data berhasil Di Hapus" << endl << endl;
+    }
+    else {
+        cout << "Antrian Kosong" <<endl <<endl;
+    }
+}
+
+void tampildata(){
+    if (!isempty()){
+        for (int i=antre.awal; i<antre.akhir; i++){
+            cout << antre.data[i] << " | ";
+        }
+    }
+    else {
+        cout << "Data pada antrian Kosong";
+    }
+    cout <<endl <<endl;
+}
+
+void clear() {
+    antre.awal = -1;
+    antre.akhir = -1;
+    cout<<"Queue berhasil dikosongkan " << endl << endl;
+}
+
+
+int total(){
+    antre.jml = 0;
+    for (int i=antre.awal; i<antre.akhir; i++){
+        antre.jml = antre.jml+antre.data[i];
+    }
+    cout << "Jumlah Data     = " << antre.jml << endl;
+}
+
+void ratarata(){
+    float ratata;
+    int bagi;
+    bagi = antre.akhir +1;
+    ratata = (float)antre.jml/(float)bagi;
+    cout << "Jumlah Data     = " << antre.jml <<endl;
+    cout << "Banyaknya Data  = " << bagi <<endl;
+    cout << "Rata - Rata = " << ratata << endl <<endl;
+}
+
+void search(){
+    for(int i=antre.awal; i<antre.akhir; i++){
+            cout << antre.data[i] << " | ";
+        }
+    int angka, j=0;
+    cout << endl <<"Pencarian" << endl;
+    cout << "Masukkan Data yang ingin di Cari = ";
+    cin >> angka;
+    for (int a=antre.awal; a<antre.akhir; a++){
+        if (antre.data[a]==angka){
+            cout << "Data " << angka << " ditemukan di index nomor = " <<a+2;
+            j=1;
+        }
+    }
+    if (j == 0){
+        cout << "Data tidak Di temukan";
+    }
+        cout << endl << endl;
+}
+
+main (){
+    int pilihan, elemen;
+    pertama();
+    do{
+        cout <<"MENU PROGRAM :"<<endl<<endl;
+        cout<<"1. Masukkan Nomor Antrian"<<endl;
+        cout<<"2. Hapus"<<endl;
+        cout<<"3. tampil data"<<endl;
+        cout<<"4. Jumlah Data"<<endl;
+        cout<<"5. Rata - Rata"<<endl;
+        cout<<"6. Search"<<endl;
+        cout<<"7. Clear"<<endl;
+        cout<<"8. Keluar";
+        cout<<endl<<endl<<"input pilihan : ";cin>>pilihan;
+        switch(pilihan){
+            case 1:
+                system("cls");
+                inqueue();
+                break;
+
+            case 2:
+                system("cls");
+                dequeue();
+                break;
+
+            case 3:
+                system("cls");
+                tampildata();
+                break;
+
+
+            case 4:
+                system ("cls");
+                total();
+                break;
+
+            case 5:
+                system("cls");
+                ratarata();
+                break;
+
+            case 6:
+                system("cls");
+                search();
+                break;
+
+            case 7:
+                system("cls");
+                clear();
+                break;
+
+            case 8:
+                system ("cls");
+                exit(0);
+
+        }
+    }
+    while (pilihan!=8);
+    return 0;
+}
